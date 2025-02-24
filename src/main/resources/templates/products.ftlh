@@ -5,11 +5,17 @@
 </head>
 <body>
 <h1>BUYSELL</h1><hr>
-<h4>Товары со всего мира</h4>
+<h4>Products from whole world!</h4>
+<form action="/" method="get">
+    Search by title: <input type="text" name="title"><br>
+    <input type="submit" value="Search...">
+</form>
 <#list products as product>
     <div>
         <p><b>${product.title}</b> ${product.price} rub. | <a href="/product/${product.id}">Подробнее...</a> </p>
     </div>
+    <#else>
+    <h3>No products</h3>
 </#list>
 <hr>
 <h3> Create new </h3>
