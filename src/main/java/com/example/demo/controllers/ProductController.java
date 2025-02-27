@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.models.Product;
 import com.example.demo.services.ProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/")
     public String products(@RequestParam(name = "title", required = false) String title, Model model) {
+        log.info("start web");
         model.addAttribute("products", productService.listProducts(title));
+        log.info("run creating");
         return "products";
     }
 
@@ -35,6 +39,7 @@ public class ProductController {
     @PostMapping("/product/create")
     public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
                                 @RequestParam("file3") MultipartFile file3, Product product) throws IOException {
+        log.info("creating start");
         productService.saveProduct(product, file1, file2, file3);
         return "redirect:/";
     }
