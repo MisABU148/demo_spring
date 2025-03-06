@@ -14,7 +14,12 @@ public class UserController {
     private final UserService userService;
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "loginPage";
+    }
+    @PostMapping("/login")
+    public String enterance() {
+
+        return "entrance";
     }
     @GetMapping("/registration")
     public String registration() {
